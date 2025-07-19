@@ -1,0 +1,22 @@
+{
+  "name": "blog_crud_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "script": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "hbs": "^4.2.0",
+    "mongodb": "^6.14.0",
+    "mongoose": "^8.11.0",
+    "nodemon": "^3.1.9",
+    "route": "^0.2.5"
+  }
+}

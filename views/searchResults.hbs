@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Results</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-image: url('https://wallpapercave.com/wp/wp9983504.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: white;
+    }
+
+    .glass-bg {
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    {{> header}}
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mt-5 glass-bg p-4" style="margin-left: 300px; max-width: 800px;">
+    <h2 class="text-center text-white mb-4">Search Results for: "{{query}}"</h2>
+
+    {{#if blogs.length}}
+      <!-- Display Search Results -->
+      <div>
+        {{#each blogs}}
+          <div class="card mb-4 shadow-lg glass-bg text-white border-0">
+            <div class="card-body">
+              <div class="d-flex">
+                <!-- Avatar -->
+                <div class="me-3">
+                  <div class="d-flex justify-content-center align-items-center bg-primary text-white rounded-circle" style="width: 48px; height: 48px;">
+                    {{this.author.[0]}}
+                  </div>
+                </div>
+
+                <div class="flex-grow-1">
+                  <div class="d-flex justify-content-between">
+                    <div class="text-light">@{{this.author}}</div>
+                    <div class="text-light small">{{this.createdAt}}</div>
+                  </div>
+                  <h5 class="card-title mt-2">{{this.title}}</h5>
+                  <p class="card-text text-light">{{this.content}}</p>
+                  <div class="d-flex flex-wrap mt-2">
+                    <div class="mb-3">
+                      {{#each this.tags}}
+                        <span class="badge bg-info text-dark">#{{this}}</span>
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <p class="text-light">No blog posts found matching your search.</p>
+    {{/if}}
+
+    <a href="/blogs" class="btn btn-primary mt-4">Back to All Blogs</a>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
