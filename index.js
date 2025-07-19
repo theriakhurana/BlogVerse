@@ -1,9 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const port = process.env.PORT || 3013;
 const Blog = require("./models/blog.model.js");
 const blogRoutes = require("./routes/blog.route.js");
+
 
 const path = require("path");
 app.set("view engine", "hbs");
@@ -28,8 +30,7 @@ app.get('/update-success', (req, res) => {
 
 app.use("/blogs", blogRoutes);
 
-const mongoUri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/blog_app";
-
+const mongoUri = process.env.MONGODB_URI;
 mongoose.connect(mongoUri);
 
 const db = mongoose.connection;
