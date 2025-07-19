@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const port = 3013;
+const port = process.env.PORT || 3013;
 const Blog = require("./models/blog.model.js");
 const blogRoutes = require("./routes/blog.route.js");
 
@@ -28,13 +28,15 @@ app.get('/update-success', (req, res) => {
 
 app.use("/blogs", blogRoutes);
 
-mongoose.connect("mongodb://127.0.0.1:27017/blog_app");
+const mongoUri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/blog_app";
+
+mongoose.connect(mongoUri);
 
 const db = mongoose.connection;
 db.once("open", () => {
   console.log("MongoDB connection successful...");
   app.listen(port, () => {
-    console.log("Server is running on port http://localhost:3013");
+    console.log(`Server is running on port http://localhost:${port}`);
   });
 });
 
